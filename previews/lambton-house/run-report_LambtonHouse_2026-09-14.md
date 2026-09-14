@@ -11,7 +11,7 @@
 |---|---|
 | eyebrow | Premier Offering |
 | headline | 3 Lambton House |
-| subline 1 | Eton, Windsor |
+| subline 1 | Imperial Park, Windsor, SL4 3TR |
 | subline 2 | 3 bed \| 3.5 bath \| 1,887 sq ft |
 | subline 3 | Listed by Toby Madden |
 | CTA | Schedule a viewing |
