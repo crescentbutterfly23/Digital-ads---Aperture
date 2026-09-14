@@ -152,7 +152,14 @@
     }
     function collect() {
       var d = doc();
-      if (!d || !d.getAnimations) { fail('controls unavailable in this browser'); return false; }
+      if (!d || !d.getAnimations) {
+        // Opened from file:// in Chrome the iframe is an opaque origin, so the
+        // page cannot reach the ad's animations. The ad itself still plays.
+        fail(location.protocol === 'file:'
+             ? 'scrubber needs a served page - open this in Safari, or see the README'
+             : 'controls unavailable in this browser');
+        return false;
+      }
       st.anims = d.getAnimations();
       if (!st.anims.length) return false;   // still starting up - the poller retries
       loopEl.className = 'loop'; loopEl.textContent = 'loop 1 / ' + LOOPS;

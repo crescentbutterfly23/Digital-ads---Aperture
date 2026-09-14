@@ -3,8 +3,10 @@
 HTML5 display ad units for Aperture Global listings, and the builder that makes them.
 **Opal tier and above** (list price ≥ $1,000,000).
 
-> **Keep this repository private.** It carries Aperture logo art, the brand background
-> plates and client listing photography.
+> **This repository is public**, so that GitHub Pages can serve the ad indexes on a free
+> account. Everything committed here is on the open web and indexable: Aperture logo art,
+> the brand background plates, and client listing photography. Only add a property whose
+> photography is cleared to be public, and take a set down when the listing closes.
 
 ## Review a set
 
@@ -24,7 +26,8 @@ No server needed: double-click `index.html`, or browse it on GitHub Pages (below
 | 11850 N 5th E — Idaho Falls, ID | https://crescentbutterfly23.github.io/Digital-ads---Aperture/previews/11850-n-5th-e/11850N5thE-preview/index.html |
 
 These are the links to send to an agent. **They only work once GitHub Pages is switched on**
-for this repository — see the next section. Until then they return 404.
+for this repository — see [Share it with the agents](#share-it-with-the-agents). Until then
+they return 404, and so does `https://crescentbutterfly23.github.io/` itself.
 
 ### Same pages in a local clone
 
@@ -54,17 +57,28 @@ https://crescentbutterfly23.github.io/Digital-ads---Aperture/
 
 A `.nojekyll` file is already in place so Pages serves the folders as-is.
 
-Two things that catch this out:
+This is why the repository is public: **Pages on a private repository needs a paid plan**, so
+on a free account the Pages option only appears once the repo is public. The trade is that
+everything here — brand art and listing photography included — is on the open web.
 
-- **Pages on a private repository needs a paid plan.** On a free account the Pages option is
-  only available once the repo is public. This repo carries Aperture logo art and client
-  photography, so going public to get a link is a real decision, not a formality.
-- **Pages sites are public even when the repository is private.** Anyone with the URL can
-  open the ads; the link is not access-controlled.
+If a future set should not be public, don't commit it. Send it as a zip instead.
 
-If neither is acceptable, share the set without Pages: add the reviewer as a collaborator and
-have them clone and open `index.html`, or zip a `previews/<slug>/` folder and send it — every
-unit is self-contained, so it plays from any folder with no server.
+### Sending a zip instead
+
+Zip a `previews/<slug>/` folder and send it. Every unit is self-contained, so the ads play
+from any folder with no server and no internet.
+
+One caveat: opened by double-click (`file://`), **Chrome** blocks the review page from
+reaching inside the embedded ads, so the play/pause and scrubber controls switch themselves
+off and say so. The ads themselves still play normally. **Safari** allows it and the controls
+work. If a reviewer needs the scrubber in Chrome, serve the folder:
+
+```bash
+cd previews/<slug>/<Slug>-preview && python3 -m http.server 8000
+# then open http://localhost:8000
+```
+
+This is the only route that keeps the photography off the public web entirely.
 
 ## Build a new property
 
