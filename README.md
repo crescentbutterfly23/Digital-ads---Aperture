@@ -14,30 +14,57 @@ property's review page plays all six sizes on one page, with play/pause, replay 
 
 No server needed: double-click `index.html`, or browse it on GitHub Pages (below).
 
-In this repo:
+### Live links
 
-| Property | Review page |
+**All properties** → <https://crescentbutterfly23.github.io/Digital-ads---Aperture/>
+
+| Property | Ad index |
 |---|---|
-| 3 Lambton House — Eton, Windsor | `previews/lambton-house/LambtonHouse-preview/index.html` |
-| 11850 N 5th E — Idaho Falls, ID | `previews/11850-n-5th-e/11850N5thE-preview/index.html` |
+| 3 Lambton House — Eton, Windsor | https://crescentbutterfly23.github.io/Digital-ads---Aperture/previews/lambton-house/LambtonHouse-preview/index.html |
+| 11850 N 5th E — Idaho Falls, ID | https://crescentbutterfly23.github.io/Digital-ads---Aperture/previews/11850-n-5th-e/11850N5thE-preview/index.html |
 
-Each property folder also holds its `run-report_*.md` (copy slot by slot, which photos were
-used, per-unit weight) and `zips/` (one trafficable zip per unit).
+These are the links to send to an agent. **They only work once GitHub Pages is switched on**
+for this repository — see the next section. Until then they return 404.
+
+### Same pages in a local clone
+
+| Property | Ad index |
+|---|---|
+| 3 Lambton House — Eton, Windsor | [`previews/lambton-house/LambtonHouse-preview/index.html`](previews/lambton-house/LambtonHouse-preview/index.html) |
+| 11850 N 5th E — Idaho Falls, ID | [`previews/11850-n-5th-e/11850N5thE-preview/index.html`](previews/11850-n-5th-e/11850N5thE-preview/index.html) |
+
+Opening those from github.com's file viewer shows the HTML source, not the ads — the viewer
+never runs a page. Use the live links above, or clone the repo and open the file.
+
+Each property folder also holds its run report and zips:
+
+| Property | Run report | Zips |
+|---|---|---|
+| 3 Lambton House | [run report](previews/lambton-house/run-report_LambtonHouse_2026-09-14.md) | [`previews/lambton-house/zips/`](previews/lambton-house/zips/) |
+| 11850 N 5th E | [run report](previews/11850-n-5th-e/run-report_11850N5thE_2026-09-14.md) | [`previews/11850-n-5th-e/zips/`](previews/11850-n-5th-e/zips/) |
 
 ## Share it with the agents
 
-Turn on **Settings → Pages → Deploy from a branch → `main` / root**. The review page is then
-at:
+In this repository: **Settings → Pages → Build and deployment → Deploy from a branch →
+`main` / `/ (root)` → Save.** Give it a minute, then the links in the section above go live at:
 
 ```
-https://<owner>.github.io/<repo>/
+https://crescentbutterfly23.github.io/Digital-ads---Aperture/
 ```
 
-A `.nojekyll` file is already in place so Pages serves the folders as-is. Send the agent that
-root URL, not the raw GitHub file view — GitHub's file viewer will not run the ads.
+A `.nojekyll` file is already in place so Pages serves the folders as-is.
 
-Pages sites are public even when the repository is private. If that is not wanted, share the
-repo itself and have the reviewer open `index.html` locally, or zip the `previews/` folder.
+Two things that catch this out:
+
+- **Pages on a private repository needs a paid plan.** On a free account the Pages option is
+  only available once the repo is public. This repo carries Aperture logo art and client
+  photography, so going public to get a link is a real decision, not a formality.
+- **Pages sites are public even when the repository is private.** Anyone with the URL can
+  open the ads; the link is not access-controlled.
+
+If neither is acceptable, share the set without Pages: add the reviewer as a collaborator and
+have them clone and open `index.html`, or zip a `previews/<slug>/` folder and send it — every
+unit is self-contained, so it plays from any folder with no server.
 
 ## Build a new property
 
