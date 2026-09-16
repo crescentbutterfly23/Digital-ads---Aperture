@@ -2,6 +2,10 @@
 
 End-to-end process for one property. Written to be followed without any prior context.
 
+> The working copy of this runbook and the builder live in
+> `~/Documents/Claude/aperture-digital-ads/`. This repo is a showcase copy.
+
+
 The reference set every unit is measured against is
 `~/Downloads/ParqueDasNacoes-EN-PT-review/` (Parque das Nações). Its `README.md` is the spec.
 **Read it before starting.** Do not redesign anything — the job is to reproduce that template
