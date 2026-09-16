@@ -315,4 +315,5 @@ Each of these cost real time. They are all still possible.
 | Checking only the size you changed | Every layout bug so far was found by the client, not by me. Sweep all six. |
 | Padding the master with a still for a missing clip | Reads as a dead frame beside moving ones, and hides that a clip is owed. Carousel yes, video no — see §4. |
 | Stretching a 3 s trim into a 5.333 s scene | 24 fps source, 15 fps master: `setpts=1.778` repeats a frame every 10. Use `-t 3.3333` + `1.6*PTS` — see §4. |
+| Video stops a second or two in, on every unit at once | The review page's clock, not the ad. An unclamped `requestAnimationFrame` delta jumps `st.t` to TOTAL and calls `pause()` on all six. Tell: the card reads "holding on the last frame" while its clock shows 0.0 s. |
 | Leaving an earlier build's files in the output folder | `build.py` does not clear it. A carousel-only set survived a video rebuild, orphaned and on the old photos. Diff the folder against the order's. |

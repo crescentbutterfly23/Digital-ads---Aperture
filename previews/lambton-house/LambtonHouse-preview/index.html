@@ -517,7 +517,7 @@
     <div class="title"><span class="size">1024x768</span><span class="tag">video</span><span class="tag lang">EN</span>
       <span class="weight ok">669 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
-    <div class="fileinfo">zipped <b>583 KB</b> &middot;
+    <div class="fileinfo">zipped <b>584 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_1024x768_video_en_ad.html" target="_blank">open alone</a> &middot;
       <a href="APERTURE_LambtonHouse_1024x768_video_en_backup.jpg" download>backup</a> &middot;
       <a href="../zips/APERTURE_LambtonHouse_1024x768_video_en.zip">zip</a></div>
@@ -754,9 +754,9 @@
 " width="480" height="320" scrolling="no" frameborder="0" title="Aperture 480x320 en"></iframe></div>
   <div class="meta" style="max-width:480px">
     <div class="title"><span class="size">480x320</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">649 KB &middot; under cap</span></div>
+      <span class="weight ok">651 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
-    <div class="fileinfo">zipped <b>571 KB</b> &middot;
+    <div class="fileinfo">zipped <b>573 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_480x320_video_en_ad.html" target="_blank">open alone</a> &middot;
       <a href="APERTURE_LambtonHouse_480x320_video_en_backup.jpg" download>backup</a> &middot;
       <a href="../zips/APERTURE_LambtonHouse_480x320_video_en.zip">zip</a></div>
@@ -995,7 +995,7 @@
     <div class="title"><span class="size">970x250</span><span class="tag">video</span><span class="tag lang">EN</span>
       <span class="weight ok">655 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
-    <div class="fileinfo">zipped <b>573 KB</b> &middot;
+    <div class="fileinfo">zipped <b>574 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_970x250_video_en_ad.html" target="_blank">open alone</a> &middot;
       <a href="APERTURE_LambtonHouse_970x250_video_en_backup.jpg" download>backup</a> &middot;
       <a href="../zips/APERTURE_LambtonHouse_970x250_video_en.zip">zip</a></div>
@@ -1471,7 +1471,7 @@
 " width="300" height="600" scrolling="no" frameborder="0" title="Aperture 300x600 en"></iframe></div>
   <div class="meta" style="max-width:300px">
     <div class="title"><span class="size">300x600</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">649 KB &middot; under cap</span></div>
+      <span class="weight ok">648 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
     <div class="fileinfo">zipped <b>568 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_300x600_video_en_ad.html" target="_blank">open alone</a> &middot;
@@ -1573,7 +1573,11 @@
       if (checkReach() === false) { st.playing = false; return; }
       grabAnims();
       if (st.playing && !st.scrubbing) {
-        st.t = Math.min(st.t + (now - st.last), TOTAL);
+        // Advance by the frame delta, but never by more than one frame's worth.
+        // Six units decode at once here, so the main thread does stall on load;
+        // an unclamped delta jumps straight to TOTAL and pauses every video a
+        // second or two in, which reads as the video stopping by itself.
+        st.t = Math.min(st.t + Math.min(now - st.last, 100), TOTAL);
         if (st.t >= TOTAL) pause();
       }
       st.last = now;

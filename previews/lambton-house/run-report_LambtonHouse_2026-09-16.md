@@ -42,9 +42,9 @@ Geometry and baselines come from `assets/spec.json`, measured off the reference 
 |---|---|---|---|---|
 | 768x1024 | video | 664 KB | ok | - |
 | 1024x768 | video | 669 KB | ok | - |
-| 480x320 | video | 649 KB | ok | - |
+| 480x320 | video | 651 KB | ok | - |
 | 970x250 | video | 655 KB | ok | - |
 | 320x480 | video | 643 KB | ok | - |
-| 300x600 | video | 649 KB | ok | - |
+| 300x600 | video | 648 KB | ok | - |
 
 Cap is 700 KB per unit, uncompressed.
