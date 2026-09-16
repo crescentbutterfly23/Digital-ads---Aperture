@@ -167,7 +167,22 @@ ffmpeg -y -i $SEG/a.mp4 -i $SEG/b.mp4 -i $SEG/c.mp4 -i $SEG/d.mp4 -filter_comple
 -map "[v]" -t 15 -c:v libx264 -crf 20 -pix_fmt yuv420p -preset slow "$OUT/master.mp4"
 ```
 
-For **three** scenes: 5.333 s each (`setpts=1.778*PTS`), dissolve offsets 4.83 and 9.66.
+For **three** scenes: 5.333 s each, dissolve offsets 4.83 and 9.66.
+
+**Match the source window to the scene length, or the clip judders.** Flow returns **24 fps**;
+the master is 15 fps. Pick the trim so unique source frames equal output frames — otherwise
+ffmpeg repeats frames and the slow camera move reads as lag.
+
+| scene | trim | setpts | source frames → output |
+|---|---|---|---|
+| 4.125 s (four scenes) | `-t 2.75` | `1.5*PTS` | 66 → 62, drops a few |
+| 5.333 s (three scenes) | `-t 3.3333` | `1.6*PTS` | 80 → 80, exact 1:1 |
+
+`-t 3.0` with `setpts=1.778` — the obvious way to fill a 5.333 s scene — gives only 13.5 unique
+fps and inserts **a repeated frame every 10 frames**. It shipped that way on 11850 N 5th E and
+Natalie caught it on the live site (2026-09-16). Measure before shipping: sample consecutive
+frames and diff them; an even pan shows an even difference per frame, and a periodic near-zero
+is a repeat.
 
 **A photo with no clip yet goes in the carousel, not in the video.** Natalie's rule
 (2026-09-16). The `photos` list in the overrides feeds the photo band, and the band is
@@ -299,3 +314,5 @@ Each of these cost real time. They are all still possible.
 | `<iframe src=>` in the review page | Different origin from `file://`; controls die silently. Use `srcdoc`. |
 | Checking only the size you changed | Every layout bug so far was found by the client, not by me. Sweep all six. |
 | Padding the master with a still for a missing clip | Reads as a dead frame beside moving ones, and hides that a clip is owed. Carousel yes, video no — see §4. |
+| Stretching a 3 s trim into a 5.333 s scene | 24 fps source, 15 fps master: `setpts=1.778` repeats a frame every 10. Use `-t 3.3333` + `1.6*PTS` — see §4. |
+| Leaving an earlier build's files in the output folder | `build.py` does not clear it. A carousel-only set survived a video rebuild, orphaned and on the old photos. Diff the folder against the order's. |
