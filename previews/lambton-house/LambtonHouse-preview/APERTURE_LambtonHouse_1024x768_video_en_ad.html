@@ -182,15 +182,32 @@
 
   if (isVideo && vid) {
     hideCarouselChrome();
-    var started = false;
+    var started = false, refused = false;
     vid.addEventListener('playing', function () { started = true; }, { once: true });
-    function attempt() { var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
+    function attempt() {
+      var p = vid.play();
+      if (p && p.catch) p.catch(function (e) {
+        // A genuine refusal is NotAllowedError. Anything else - AbortError, or
+        // play() interrupted while the data is still arriving - is not.
+        if (e && e.name === 'NotAllowedError') refused = true;
+      });
+    }
     attempt();
-    // Only hand over to the carousel if the video genuinely will not run. A video
-    // that is merely still buffering reads paused/currentTime 0 for a moment, which
-    // is not a refusal.
-    setTimeout(function () { if (!started && vid.paused) attempt(); }, 700);
-    setTimeout(function () { if (!started && vid.paused) showCarousel(); }, 3000);
+    // Only hand over to the carousel if the video genuinely will not run.
+    // `vid.paused` cannot tell a refusal from a video that is merely still
+    // buffering, so waiting on it handed perfectly good units to the carousel:
+    // the review page loads six videos at once, and on a cold cache several are
+    // still buffering well past three seconds. Wait on the play() promise
+    // instead, and keep retrying as data arrives.
+    ['loadeddata', 'canplay'].forEach(function (ev) {
+      vid.addEventListener(ev, function () { if (!started) attempt(); });
+    });
+    var tries = 0;
+    var poll = setInterval(function () {
+      if (started) { clearInterval(poll); return; }
+      if (refused || ++tries > 60) { clearInterval(poll); showCarousel(); return; }
+      attempt();
+    }, 500);
   } else {
     if (swipe && ('ontouchstart' in window)) {
       swipe.style.display = 'block';

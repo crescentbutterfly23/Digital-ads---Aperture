@@ -310,7 +310,7 @@ Each of these cost real time. They are all still possible.
 | A wrapped slot (970×250 eyebrow) | Calibrate against one *line*, not the whole string. |
 | CSS `transform` on a positioned SVG group | Replaces the transform attribute; the run jumps to the corner. Keep position on an inner `<g>`. |
 | `ImageDraw.polygon` | No winding rule — letter counters fill. XOR the contours, supersample 4×. |
-| Autoplay fallback firing early | `currentTime === 0` is not a refusal. Wait for `playing`, retry, allow ~3 s. |
+| Autoplay fallback firing early | `vid.paused` is true while merely **buffering**, so a 3 s timer handed good units to the carousel — worst on a cold cache, where the review page pulls six videos at once. Only `play()` rejecting with `NotAllowedError` is a refusal; retry on `loadeddata`/`canplay` until then. |
 | `<iframe src=>` in the review page | Different origin from `file://`; controls die silently. Use `srcdoc`. |
 | Checking only the size you changed | Every layout bug so far was found by the client, not by me. Sweep all six. |
 | Padding the master with a still for a missing clip | Reads as a dead frame beside moving ones, and hides that a clip is owed. Carousel yes, video no — see §4. |
