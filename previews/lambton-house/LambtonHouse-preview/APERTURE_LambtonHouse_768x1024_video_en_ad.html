@@ -230,7 +230,20 @@
       if (vid) { try { vid.currentTime = 0; } catch (e) {} }
       i = 0; go(0);
     },
-    play: function () { if (isVideo && vid) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); } else { restart(); } }
+    play: function () { if (isVideo && vid) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); } else { restart(); } },
+    // Review hook. A browser that refuses autoplay gets the carousel, which is
+    // correct in a placement but useless when the point is to watch the video.
+    // The review page calls this from a real click, which always lifts the
+    // refusal, and puts the video back if the fallback had already taken over.
+    forcePlay: function () {
+      if (!vid) return false;
+      clearInterval(timer);
+      isVideo = true;
+      vid.style.display = '';
+      hideCarouselChrome();
+      var p = vid.play(); if (p && p.catch) p.catch(function () {});
+      return true;
+    }
   };
 })();
 </script>

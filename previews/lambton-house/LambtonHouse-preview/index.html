@@ -284,7 +284,20 @@
       if (vid) { try { vid.currentTime = 0; } catch (e) {} }
       i = 0; go(0);
     },
-    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } }
+    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } },
+    // Review hook. A browser that refuses autoplay gets the carousel, which is
+    // correct in a placement but useless when the point is to watch the video.
+    // The review page calls this from a real click, which always lifts the
+    // refusal, and puts the video back if the fallback had already taken over.
+    forcePlay: function () {
+      if (!vid) return false;
+      clearInterval(timer);
+      isVideo = true;
+      vid.style.display = '';
+      hideCarouselChrome();
+      var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {});
+      return true;
+    }
   };
 })();
 &lt;/script&gt;
@@ -293,7 +306,7 @@
 " width="768" height="1024" scrolling="no" frameborder="0" title="Aperture 768x1024 en"></iframe></div>
   <div class="meta" style="max-width:768px">
     <div class="title"><span class="size">768x1024</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">665 KB &middot; under cap</span></div>
+      <span class="weight ok">666 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
     <div class="fileinfo">zipped <b>579 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_768x1024_video_en_ad.html" target="_blank">open alone</a> &middot;
@@ -540,7 +553,20 @@
       if (vid) { try { vid.currentTime = 0; } catch (e) {} }
       i = 0; go(0);
     },
-    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } }
+    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } },
+    // Review hook. A browser that refuses autoplay gets the carousel, which is
+    // correct in a placement but useless when the point is to watch the video.
+    // The review page calls this from a real click, which always lifts the
+    // refusal, and puts the video back if the fallback had already taken over.
+    forcePlay: function () {
+      if (!vid) return false;
+      clearInterval(timer);
+      isVideo = true;
+      vid.style.display = '';
+      hideCarouselChrome();
+      var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {});
+      return true;
+    }
   };
 })();
 &lt;/script&gt;
@@ -549,7 +575,7 @@
 " width="1024" height="768" scrolling="no" frameborder="0" title="Aperture 1024x768 en"></iframe></div>
   <div class="meta" style="max-width:1024px">
     <div class="title"><span class="size">1024x768</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">670 KB &middot; under cap</span></div>
+      <span class="weight ok">671 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
     <div class="fileinfo">zipped <b>584 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_1024x768_video_en_ad.html" target="_blank">open alone</a> &middot;
@@ -796,7 +822,20 @@
       if (vid) { try { vid.currentTime = 0; } catch (e) {} }
       i = 0; go(0);
     },
-    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } }
+    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } },
+    // Review hook. A browser that refuses autoplay gets the carousel, which is
+    // correct in a placement but useless when the point is to watch the video.
+    // The review page calls this from a real click, which always lifts the
+    // refusal, and puts the video back if the fallback had already taken over.
+    forcePlay: function () {
+      if (!vid) return false;
+      clearInterval(timer);
+      isVideo = true;
+      vid.style.display = '';
+      hideCarouselChrome();
+      var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {});
+      return true;
+    }
   };
 })();
 &lt;/script&gt;
@@ -805,9 +844,9 @@
 " width="480" height="320" scrolling="no" frameborder="0" title="Aperture 480x320 en"></iframe></div>
   <div class="meta" style="max-width:480px">
     <div class="title"><span class="size">480x320</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">651 KB &middot; under cap</span></div>
+      <span class="weight ok">650 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
-    <div class="fileinfo">zipped <b>572 KB</b> &middot;
+    <div class="fileinfo">zipped <b>570 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_480x320_video_en_ad.html" target="_blank">open alone</a> &middot;
       <a href="APERTURE_LambtonHouse_480x320_video_en_backup.jpg" download>backup</a> &middot;
       <a href="../zips/APERTURE_LambtonHouse_480x320_video_en.zip">zip</a></div>
@@ -1052,7 +1091,20 @@
       if (vid) { try { vid.currentTime = 0; } catch (e) {} }
       i = 0; go(0);
     },
-    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } }
+    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } },
+    // Review hook. A browser that refuses autoplay gets the carousel, which is
+    // correct in a placement but useless when the point is to watch the video.
+    // The review page calls this from a real click, which always lifts the
+    // refusal, and puts the video back if the fallback had already taken over.
+    forcePlay: function () {
+      if (!vid) return false;
+      clearInterval(timer);
+      isVideo = true;
+      vid.style.display = '';
+      hideCarouselChrome();
+      var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {});
+      return true;
+    }
   };
 })();
 &lt;/script&gt;
@@ -1061,9 +1113,9 @@
 " width="970" height="250" scrolling="no" frameborder="0" title="Aperture 970x250 en"></iframe></div>
   <div class="meta" style="max-width:970px">
     <div class="title"><span class="size">970x250</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">655 KB &middot; under cap</span></div>
+      <span class="weight ok">654 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
-    <div class="fileinfo">zipped <b>573 KB</b> &middot;
+    <div class="fileinfo">zipped <b>572 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_970x250_video_en_ad.html" target="_blank">open alone</a> &middot;
       <a href="APERTURE_LambtonHouse_970x250_video_en_backup.jpg" download>backup</a> &middot;
       <a href="../zips/APERTURE_LambtonHouse_970x250_video_en.zip">zip</a></div>
@@ -1308,7 +1360,20 @@
       if (vid) { try { vid.currentTime = 0; } catch (e) {} }
       i = 0; go(0);
     },
-    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } }
+    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } },
+    // Review hook. A browser that refuses autoplay gets the carousel, which is
+    // correct in a placement but useless when the point is to watch the video.
+    // The review page calls this from a real click, which always lifts the
+    // refusal, and puts the video back if the fallback had already taken over.
+    forcePlay: function () {
+      if (!vid) return false;
+      clearInterval(timer);
+      isVideo = true;
+      vid.style.display = '';
+      hideCarouselChrome();
+      var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {});
+      return true;
+    }
   };
 })();
 &lt;/script&gt;
@@ -1317,9 +1382,9 @@
 " width="320" height="480" scrolling="no" frameborder="0" title="Aperture 320x480 en"></iframe></div>
   <div class="meta" style="max-width:320px">
     <div class="title"><span class="size">320x480</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">644 KB &middot; under cap</span></div>
+      <span class="weight ok">642 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
-    <div class="fileinfo">zipped <b>563 KB</b> &middot;
+    <div class="fileinfo">zipped <b>561 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_320x480_video_en_ad.html" target="_blank">open alone</a> &middot;
       <a href="APERTURE_LambtonHouse_320x480_video_en_backup.jpg" download>backup</a> &middot;
       <a href="../zips/APERTURE_LambtonHouse_320x480_video_en.zip">zip</a></div>
@@ -1564,7 +1629,20 @@
       if (vid) { try { vid.currentTime = 0; } catch (e) {} }
       i = 0; go(0);
     },
-    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } }
+    play: function () { if (isVideo &amp;&amp; vid) { var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {}); } else { restart(); } },
+    // Review hook. A browser that refuses autoplay gets the carousel, which is
+    // correct in a placement but useless when the point is to watch the video.
+    // The review page calls this from a real click, which always lifts the
+    // refusal, and puts the video back if the fallback had already taken over.
+    forcePlay: function () {
+      if (!vid) return false;
+      clearInterval(timer);
+      isVideo = true;
+      vid.style.display = '';
+      hideCarouselChrome();
+      var p = vid.play(); if (p &amp;&amp; p.catch) p.catch(function () {});
+      return true;
+    }
   };
 })();
 &lt;/script&gt;
@@ -1573,9 +1651,9 @@
 " width="300" height="600" scrolling="no" frameborder="0" title="Aperture 300x600 en"></iframe></div>
   <div class="meta" style="max-width:300px">
     <div class="title"><span class="size">300x600</span><span class="tag">video</span><span class="tag lang">EN</span>
-      <span class="weight ok">647 KB &middot; under cap</span></div>
+      <span class="weight ok">648 KB &middot; under cap</span></div>
     <p class="notes">Video version: the walkthrough as a 15 s silent H.264 loop; if autoplay is refused (Safari Low Power Mode) the 4-photo carousel underneath takes over as the fallback.</p>
-    <div class="fileinfo">zipped <b>566 KB</b> &middot;
+    <div class="fileinfo">zipped <b>567 KB</b> &middot;
       <a href="APERTURE_LambtonHouse_300x600_video_en_ad.html" target="_blank">open alone</a> &middot;
       <a href="APERTURE_LambtonHouse_300x600_video_en_backup.jpg" download>backup</a> &middot;
       <a href="../zips/APERTURE_LambtonHouse_300x600_video_en.zip">zip</a></div>
@@ -1708,6 +1786,46 @@
 
   [].forEach.call(document.querySelectorAll('.card'), function (c) { cards.push(bind(c)); });
   (function loop(now) { cards.forEach(function (c) { c.tick(now || performance.now()); }); requestAnimationFrame(loop); })();
+
+  // If the browser refuses autoplay, every unit correctly drops to its carousel
+  // fallback - which is right in a placement and useless in review. Offer one
+  // click to start them: a real user gesture always lifts the refusal.
+  (function () {
+    var bar = null;
+    function videos() {
+      return [].map.call(document.querySelectorAll('.card iframe'), function (f) {
+        try { return { w: f.contentWindow, v: f.contentDocument.querySelector('video') }; }
+        catch (e) { return null; }
+      }).filter(function (x) { return x && x.v; });
+    }
+    function stalled() {
+      return videos().filter(function (x) {
+        return x.v.paused || x.v.style.display === 'none' || x.v.currentTime === 0;
+      }).length;
+    }
+    function start() {
+      videos().forEach(function (x) {
+        if (x.w.__ad && x.w.__ad.forcePlay) x.w.__ad.forcePlay();
+        else { var p = x.v.play(); if (p && p.catch) p.catch(function () {}); }
+      });
+      setTimeout(function () { if (bar && stalled() === 0) { bar.remove(); bar = null; } }, 900);
+    }
+    document.addEventListener('click', start, true);
+    document.addEventListener('keydown', start, true);
+    setTimeout(function () {
+      var n = stalled();
+      if (!n || bar) return;
+      bar = document.createElement('button');
+      bar.type = 'button';
+      bar.textContent = '\u25B6 ' + (n === videos().length ? 'Autoplay is blocked here - click to play every unit'
+                                                           : 'Click to start ' + n + ' unit' + (n > 1 ? 's' : ''));
+      bar.style.cssText = 'position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:99;'
+        + 'background:var(--blue);color:#fff;border:0;border-radius:999px;padding:11px 20px;'
+        + 'font:inherit;font-weight:600;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.5)';
+      bar.onclick = start;
+      document.body.appendChild(bar);
+    }, 4000);
+  })();
   document.getElementById('allreplay').onclick = function () {
     cards.forEach(function (c) { c.replay(); }); };
   document.getElementById('alllast').onclick = function () {

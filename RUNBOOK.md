@@ -310,6 +310,7 @@ Each of these cost real time. They are all still possible.
 | A wrapped slot (970×250 eyebrow) | Calibrate against one *line*, not the whole string. |
 | CSS `transform` on a positioned SVG group | Replaces the transform attribute; the run jumps to the corner. Keep position on an inner `<g>`. |
 | `ImageDraw.polygon` | No winding rule — letter counters fill. XOR the contours, supersample 4×. |
+| "The video stops after a second" | Usually not a stop: the unit fell back to its carousel because the browser refused autoplay, which is the specified behaviour. Tell: arrows and dots appear and the photos start cycling. The review page now offers one click to force playback (`__ad.forcePlay`). |
 | Autoplay fallback firing early | `vid.paused` is true while merely **buffering**, so a 3 s timer handed good units to the carousel — worst on a cold cache, where the review page pulls six videos at once. Only `play()` rejecting with `NotAllowedError` is a refusal; retry on `loadeddata`/`canplay` until then. |
 | `<iframe src=>` in the review page | Different origin from `file://`; controls die silently. Use `srcdoc`. |
 | Checking only the size you changed | Every layout bug so far was found by the client, not by me. Sweep all six. |
