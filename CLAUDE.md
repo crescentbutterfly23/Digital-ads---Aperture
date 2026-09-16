@@ -38,6 +38,8 @@ Needs Python 3 + Pillow + fontTools + ffmpeg.
   editing the CSV.
 - Review `lines` and `photos` on every order — both defaults produce output that looks fine in
   the run log and wrong in the unit.
+- **A photo with no clip yet goes in the carousel, not the video.** Never pad the master with a
+  still standing in for a clip that has not been generated — build it from the scenes you have.
 - Every unit stays under the 700 KB cap.
 - Verify **all six sizes at three moments** before showing anyone. Every layout bug so far was
   caught by the client, not by the build.

@@ -2,8 +2,9 @@
 
 End-to-end process for one property. Written to be followed without any prior context.
 
-> The working copy of this runbook and the builder live in
-> `~/Documents/Claude/aperture-digital-ads/`. This repo is a showcase copy.
+> **This folder is the working home of the routine.** The GitHub repo
+> `~/Documents/Github/Digital ads - Aperture` is a *showcase copy* for sharing with a
+> manager — build here, sync there. If the two disagree, this one is right.
 
 
 The reference set every unit is measured against is
@@ -168,8 +169,21 @@ ffmpeg -y -i $SEG/a.mp4 -i $SEG/b.mp4 -i $SEG/c.mp4 -i $SEG/d.mp4 -filter_comple
 
 For **three** scenes: 5.333 s each (`setpts=1.778*PTS`), dissolve offsets 4.83 and 9.66.
 
-A scene that only needs a gentle move can come from the **real photograph** instead of a
-generated clip — truer to the property and free:
+**A photo with no clip yet goes in the carousel, not in the video.** Natalie's rule
+(2026-09-16). The `photos` list in the overrides feeds the photo band, and the band is
+independent of the master — a fourth photo can ride in the carousel while the video runs three
+scenes. Do **not** pad the master with a still standing in for a clip that has not been
+generated: it reads as a dead frame next to three moving ones, and it hides the fact that a
+clip is still owed. Build the master from the scenes you actually have — three scenes at
+5.333 s, or two at 7.5 s (dissolve offset 7.0) — and generate the missing clip later, then
+re-cut and rebuild. The carousel set is finished either way.
+
+That is what 11850 N 5th E shipped as: four photos in the band, three scenes in the video,
+because Flow hit its usage limit before the bridal-suite clip generated.
+
+A scene that only needs a gentle move — a deliberate choice, not a stand-in for a missing
+clip — can come from the **real photograph** instead of a generated clip; truer to the
+property and free:
 
 ```bash
 ffmpeg -y -loop 1 -i photo.jpg -t 4.125 \
@@ -284,3 +298,4 @@ Each of these cost real time. They are all still possible.
 | Autoplay fallback firing early | `currentTime === 0` is not a refusal. Wait for `playing`, retry, allow ~3 s. |
 | `<iframe src=>` in the review page | Different origin from `file://`; controls die silently. Use `srcdoc`. |
 | Checking only the size you changed | Every layout bug so far was found by the client, not by me. Sweep all six. |
+| Padding the master with a still for a missing clip | Reads as a dead frame beside moving ones, and hides that a clip is owed. Carousel yes, video no — see §4. |
