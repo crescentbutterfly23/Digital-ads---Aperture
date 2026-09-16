@@ -12,6 +12,9 @@ The reference the whole routine is measured against is the Parque das Nações s
 (`~/Downloads/ParqueDasNacoes-EN-PT-review`). Its README is the spec; this one describes how
 the builder meets it.
 
+**New property? Follow [`RUNBOOK.md`](RUNBOOK.md).** It is the end-to-end process,
+written to be followed cold.
+
 ## Review a set
 
 Open `index.html` at the root — it links every property in this repo. Each property's review
@@ -79,8 +82,9 @@ Faces: **Cormorant Garamond Light** headline, **Cormorant Garamond Medium Italic
 
 ## The walkthrough video
 
-Generated in Google Flow from the listing stills, then assembled here with ffmpeg — see
-`docs/video.md`. Three points that matter:
+Generated in Google Flow from the listing stills, then assembled here with ffmpeg.
+**`RUNBOOK.md` has the full step-by-step**, including the prompts and the ffmpeg commands.
+Three points that matter:
 
 - One clip **per room**, a subtle move inside that single space. Never "image A travelling to
   image B": we do not know the layouts, and the model invents architecture. It has produced a

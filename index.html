@@ -9,14 +9,15 @@
   h1 { font-size:26px; font-weight:600; margin:0 0 4px; letter-spacing:.01em; }
   .sub { color:var(--muted); font-size:14px; margin:0 0 36px; }
   .card { display:block; background:var(--panel); border:1px solid var(--line); border-radius:14px;
-    padding:20px 22px; margin-bottom:18px; text-decoration:none; color:inherit; transition:border-color .15s; }
+    padding:20px 22px; margin-bottom:6px; text-decoration:none; color:inherit; transition:border-color .15s; }
   .card:hover { border-color:var(--blue); }
   .card h2 { margin:0 0 3px; font-size:19px; font-weight:600; }
   .card .where { color:var(--muted); font-size:13.5px; margin:0 0 12px; }
   .chips { display:flex; gap:7px; flex-wrap:wrap; }
   .chip { font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
     border:1px solid var(--line); border-radius:999px; padding:3px 9px; }
-  .more { margin-top:12px; font-size:13px; color:var(--muted); }
+  .chip.pending { color:#c9a35a; border-color:rgba(201,163,90,.5); }
+  .more { margin:0 0 22px; font-size:13px; color:var(--muted); }
   .more a { color:var(--blue); }
   footer { color:var(--muted); font-size:13px; border-top:1px solid var(--line);
     margin-top:36px; padding-top:20px; }
@@ -24,33 +25,36 @@
 </style></head><body><div class="wrap">
 
 <h1>Aperture Global &middot; digital ads</h1>
-<p class="sub">HTML5 display units. Open a property to play every size on one page &mdash;
-play/pause, replay and a 15-second scrubber on each unit.</p>
+<p class="sub">HTML5 display units, six sizes each. Open a property to play every size on one
+page &mdash; play/pause, replay, a 15-second scrubber, and Last frame.</p>
 
 <a class="card" href="previews/lambton-house/LambtonHouse-preview/index.html">
   <h2>3 Lambton House</h2>
-  <p class="where">Eton, Windsor &middot; SL4 3TR &middot; Toby Madden</p>
-  <div class="chips"><span class="chip">6 units</span><span class="chip">carousel</span>
-    <span class="chip">English</span><span class="chip">all under 700 KB</span></div>
+  <p class="where">Imperial Park, Windsor, SL4 3TR &middot; Toby Madden</p>
+  <div class="chips"><span class="chip">6 units</span><span class="chip">video</span>
+    <span class="chip">English</span><span class="chip">under 700 KB</span></div>
 </a>
-<p class="more">&mdash; <a href="previews/lambton-house/run-report_LambtonHouse_2026-09-14.md">run report</a>
-   &middot; <a href="previews/lambton-house/zips/">trafficable zips</a></p>
+<p class="more">&mdash; <a href="previews/lambton-house/run-report_LambtonHouse_2026-09-16.md">run report</a>
+   &middot; <a href="previews/lambton-house/README.md">trafficking notes</a>
+   &middot; <a href="previews/lambton-house/zips/">zips</a></p>
 
 <a class="card" href="previews/11850-n-5th-e/11850N5thE-preview/index.html">
   <h2>11850 N 5th E</h2>
   <p class="where">Idaho Falls, Idaho &middot; Mel Biggs</p>
   <div class="chips"><span class="chip">6 units</span><span class="chip">carousel</span>
-    <span class="chip">English</span><span class="chip">all under 700 KB</span></div>
+    <span class="chip">English</span><span class="chip pending">walkthrough pending</span></div>
 </a>
-<p class="more">&mdash; <a href="previews/11850-n-5th-e/run-report_11850N5thE_2026-09-14.md">run report</a>
-   &middot; <a href="previews/11850-n-5th-e/zips/">trafficable zips</a></p>
+<p class="more">&mdash; <a href="previews/11850-n-5th-e/run-report_11850N5thE_2026-09-16.md">run report</a>
+   &middot; <a href="previews/11850-n-5th-e/README.md">trafficking notes</a>
+   &middot; <a href="previews/11850-n-5th-e/zips/">zips</a><br>
+   The video units follow once its walkthrough clips are generated; the carousel set is final.</p>
 
 <footer>
   Sizes: 768&times;1024, 1024&times;768, 480&times;320, 970&times;250, 320&times;480, 300&times;600.
-  Every unit is self-contained &mdash; no server, no CDN, no webfont fetch.
-  Click-through is the CTA only; <code>clickTag</code> defaults to apertureglobal.com and is
-  overridable per placement with <code>?clicktag=&lt;url&gt;</code>.
-  <br><br>Built with <a href="README.md">build.py</a> from each order's Power Pack CSV.
+  Every unit is self-contained &mdash; no server, no CDN, no webfonts; the copy is baked to
+  vector outlines. Click-through is the CTA only; <code>clickTag</code> defaults to
+  apertureglobal.com and is overridable per placement with <code>?clicktag=&lt;url&gt;</code>.
+  <br><br>Building the next one? Follow <a href="RUNBOOK.md">RUNBOOK.md</a>.
 </footer>
 
 </div></body></html>
