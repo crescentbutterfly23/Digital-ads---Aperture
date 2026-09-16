@@ -8,181 +8,135 @@ HTML5 display ad units for Aperture Global listings, and the builder that makes 
 > the brand background plates, and client listing photography. Only add a property whose
 > photography is cleared to be public, and take a set down when the listing closes.
 
+The reference the whole routine is measured against is the Parque das Nações set
+(`~/Downloads/ParqueDasNacoes-EN-PT-review`). Its README is the spec; this one describes how
+the builder meets it.
+
 ## Review a set
 
-Open `index.html` at the root — it links every property in this repo. From there each
-property's review page plays all six sizes on one page, with play/pause, replay and a
-15-second scrubber per unit (the scrubber drives the photo band as well as the copy).
+Open `index.html` at the root — it links every property in this repo. Each property's review
+page plays all six sizes on one page, with play/pause, replay and a 15-second scrubber per
+unit, plus **Replay all** and **Last frame**.
 
-No server needed: double-click `index.html`, or browse it on GitHub Pages (below).
-
-### Live links
-
-**All properties** → <https://crescentbutterfly23.github.io/Digital-ads---Aperture/>
+Each unit is inlined into the page with `srcdoc`, so the iframes are same-origin with the
+review page and the controls work when the file is opened straight off the disk. No server.
 
 | Property | Ad index |
 |---|---|
-| 3 Lambton House — Eton, Windsor | https://crescentbutterfly23.github.io/Digital-ads---Aperture/previews/lambton-house/LambtonHouse-preview/index.html |
-| 11850 N 5th E — Idaho Falls, ID | https://crescentbutterfly23.github.io/Digital-ads---Aperture/previews/11850-n-5th-e/11850N5thE-preview/index.html |
+| 3 Lambton House — Eton, Windsor | `previews/lambton-house/LambtonHouse-preview/index.html` |
+| 11850 N 5th E — Idaho Falls, ID | `previews/11850-n-5th-e/11850N5thE-preview/index.html` |
 
-These are the links to send to an agent. **They only work once GitHub Pages is switched on**
-for this repository — see [Share it with the agents](#share-it-with-the-agents). Until then
-they return 404, and so does `https://crescentbutterfly23.github.io/` itself.
+Live, once Pages is enabled: <https://crescentbutterfly23.github.io/Digital-ads---Aperture/>
 
-### Same pages in a local clone
-
-| Property | Ad index |
-|---|---|
-| 3 Lambton House — Eton, Windsor | [`previews/lambton-house/LambtonHouse-preview/index.html`](previews/lambton-house/LambtonHouse-preview/index.html) |
-| 11850 N 5th E — Idaho Falls, ID | [`previews/11850-n-5th-e/11850N5thE-preview/index.html`](previews/11850-n-5th-e/11850N5thE-preview/index.html) |
-
-Opening those from github.com's file viewer shows the HTML source, not the ads — the viewer
-never runs a page. Use the live links above, or clone the repo and open the file.
-
-Each property folder also holds its run report and zips:
-
-| Property | Run report | Zips |
-|---|---|---|
-| 3 Lambton House | [run report](previews/lambton-house/run-report_LambtonHouse_2026-09-14.md) | [`previews/lambton-house/zips/`](previews/lambton-house/zips/) |
-| 11850 N 5th E | [run report](previews/11850-n-5th-e/run-report_11850N5thE_2026-09-14.md) | [`previews/11850-n-5th-e/zips/`](previews/11850-n-5th-e/zips/) |
-
-## Share it with the agents
-
-In this repository: **Settings → Pages → Build and deployment → Deploy from a branch →
-`main` / `/ (root)` → Save.** Give it a minute, then the links in the section above go live at:
-
-```
-https://crescentbutterfly23.github.io/Digital-ads---Aperture/
-```
-
-A `.nojekyll` file is already in place so Pages serves the folders as-is.
-
-This is why the repository is public: **Pages on a private repository needs a paid plan**, so
-on a free account the Pages option only appears once the repo is public. The trade is that
-everything here — brand art and listing photography included — is on the open web.
-
-If a future set should not be public, don't commit it. Send it as a zip instead.
-
-### Sending a zip instead
-
-Zip a `previews/<slug>/` folder and send it. Every unit is self-contained, so the ads play
-from any folder with no server and no internet.
-
-One caveat: opened by double-click (`file://`), **Chrome** blocks the review page from
-reaching inside the embedded ads, so the play/pause and scrubber controls switch themselves
-off and say so. The ads themselves still play normally. **Safari** allows it and the controls
-work. If a reviewer needs the scrubber in Chrome, serve the folder:
-
-```bash
-cd previews/<slug>/<Slug>-preview && python3 -m http.server 8000
-# then open http://localhost:8000
-```
-
-This is the only route that keeps the photography off the public web entirely.
-
-## Build a new property
+## Build a property
 
 ```bash
 python3 build.py \
   --order "<Aperture Pack orders>/<order folder>" \
   --overrides overrides/<slug>.json \
+  --video "<walkthrough master>.mp4" \
   --out "previews/<slug>"
 ```
 
-Requires Python 3 with Pillow:
+Needs Python 3 with Pillow, fontTools and ffmpeg.
 
-```bash
-pip3 install --user pillow
+Output, matching the reference package:
+
 ```
-
-The two sets in this repo were produced with exactly:
-
-```bash
-python3 build.py --order ".../3 Lambton House, Imperial Park, Windsor, SL4 3TR" --overrides overrides/lambton.json     --out previews/lambton-house
-python3 build.py --order ".../11850 N 5th E, Idaho Falls, ID"                   --overrides overrides/idaho-falls.json --out previews/11850-n-5th-e
+<out>/
+  README.md                       for whoever traffics the set
+  run-report_<Slug>_<date>.md     copy, photo picks, weights, warnings
+  <Slug>-preview/
+    index.html                    the review page
+    APERTURE_<Slug>_<size>_video_en_ad.html
+    APERTURE_<Slug>_<size>_video_en_video.mp4
+    APERTURE_<Slug>_<size>_video_en_bg.jpg
+    APERTURE_<Slug>_<size>_video_en_photo1..4.jpg
+    APERTURE_<Slug>_<size>_video_en_backup.jpg
+  zips/                           one trafficable zip per unit
 ```
-
-After adding a property, add a card for it in the root `index.html`.
 
 ## What it makes
 
 | | |
 |---|---|
 | Sizes | 768×1024, 1024×768, 480×320, 970×250, 320×480, 300×600 |
-| Variant | carousel — four photos with arrows, dots, swipe and auto-advance |
-| Loop | 7.5 s copy cycle, running continuously |
-| Weight | held under the 700 KB cap; the builder prints each unit's weight and flags anything over |
-| Click-through | the CTA only, not the whole ad |
-| Backup still | `*_backup.jpg` per unit, for placements that need a static |
+| Variant | **video** — one unit per size. The four photos sit underneath as the autoplay fallback. Pass `--variants video carousel` for both. |
+| Loop | 15 s, two 7.5 s copy cycles |
+| Weight | held under the 700 KB cap; the video is sized to whatever the html, background and photos leave |
+| Click-through | the CTA only, never the whole ad. `clickTag` defaults to apertureglobal.com, overridable with `?clicktag=<url>` |
+| Backup still | `*_backup.jpg` per unit |
 
-Units are self-contained: no webfonts fetched, no CDN, no server. Copy is set in embedded
-subset webfonts — **Playfair Display 500** for the headline, **Archivo 300/500** for
-everything else.
+**Copy is baked to vector outlines** (`outline.py`), as the reference does it. The units carry
+no webfonts at all. That is not only about portability: with outlines there is no shaping
+engine, so the browser and the Pillow still renderer cannot disagree about metrics — which was
+the cause of a long run of size and baseline bugs. Outlined runs are cached in
+`assets/outlines/`, keyed font+size+tracking+text, so repeat builds and the runs shared across
+properties (the CTA, the eyebrow) cost nothing.
+
+Faces: **Cormorant Garamond Light** headline, **Cormorant Garamond Medium Italic** eyebrow,
+**Archivo Light** sublines, **Archivo Medium** CTA. Not Playfair.
+
+## The walkthrough video
+
+Generated in Google Flow from the listing stills, then assembled here with ffmpeg — see
+`docs/video.md`. Three points that matter:
+
+- One clip **per room**, a subtle move inside that single space. Never "image A travelling to
+  image B": we do not know the layouts, and the model invents architecture. It has produced a
+  fly-through of a facade and an entirely fabricated building.
+- Hold the source photograph's framing. When the frame matches the photo, anything invented is
+  obvious; when the camera roams you cannot tell what is real.
+- Cut the clips together with cross-dissolves. The reference is four scenes, ~3.75 s each,
+  15 fps, 15.000 s.
 
 ## Copy model
 
-Read from the newest `CSV/property_data_*.csv` in the order folder:
+From the newest `CSV/property_data_*.csv` in the order folder:
 
-- **eyebrow** ← `tagline`, uppercased, shown on the first pass then retired
+- **eyebrow** — always **"Exclusive Offer"**, house copy, *not* the CSV `tagline`. It opens the
+  ad beside the aperture mark and hands over to the full logo.
 - **headline** ← `street`
-- **rotating sublines** ← location, spec (`br | bth | sqft`), `Listed by <name>`
+- **rotating sublines** ← location, spec, `Listed by <name>`
 - **CTA** — "Schedule a viewing"
 
-Anything there can be replaced per property in `overrides/<slug>.json`. Override rather than
-edit the CSV; the CSV belongs to the Power Pack.
+Override per property in `overrides/<slug>.json` rather than editing the CSV; the CSV belongs
+to the Power Pack routine. Two fields need a decision on **every** order:
 
-Two fields need a decision on **every** order:
-
-1. **`lines`** replaces the whole rotating set. Use it whenever the CSV's
-   bedrooms/bathrooms/sqft do not describe the property the way a buyer reads it — 11850 N 5th E
-   carries acreage and building sizes in those columns, so the generated spec line would have
-   read "25 br | 5000 bth".
-2. **`photos`** takes exactly four images, order-relative. Left unset, the builder picks one
-   per room type from `out/previews`, then `out/print`, then `out/`, in the order exterior →
-   living → kitchen → master → outdoor → dining → entry → amenities → interior. **Always look
-   at the four it picked** — slug order picks a category, not a good picture.
+1. **`lines`** replaces the whole rotating set. Use it when the CSV's bedrooms/bathrooms/sqft
+   do not describe the property the way a buyer reads it — 11850 N 5th E carries acreage and
+   building sizes in those columns, so the generated spec line would read "25 br | 5000 bth".
+2. **`photos`** takes exactly four images, order-relative. Auto-selection picks a *category* by
+   filename slug, not a good picture. Always look at what it chose.
 
 `cityState` is right for print and often wrong for an ad line: "Windsor, SL4 3TR" became
-"Eton, Windsor".
+"Imperial Park, Windsor, SL4 3TR".
 
 ## Checks the builder runs
 
-Problems print under the size in the run log and land in the run report:
+Printed under each size and written into the run report:
 
-- a line that outgrows its column (it is auto-shrunk to 68% of the design size first; a
-  warning means even that did not fit)
+- a line that outgrows its column
 - a line that lands on the photo band
 - a CTA rule that falls outside the unit
 - unit weight over the 700 KB cap
 
-## Repository layout
+## Assets
 
-```
-index.html              landing page — links every property
-build.py                the builder
-overrides/              per-property copy and photo choices
-assets/
-  <size>/bg.jpg         brand ground, one per size
-  <size>/logo.png       flattened logo plate for the backup still
-  logo-master.svg       live logo art, placed per size by SIZES in build.py
-  fonts/                Playfair Display + Archivo, subset (woff2 embedded, ttf for stills)
-previews/<slug>/
-  <Slug>-preview/       the review page and the units
-  zips/                 one trafficable zip per unit
-  run-report_*.md
-```
+`assets/` is brand furniture, not per-property, recovered from the reference set:
+
+- `<size>/bg.jpg` — the dark ground
+- `<size>/logo.png` + `logo.json` — flattened logo plate and origin, for the backup still
+- `logo-master.svg` — the live logo art, placed per size by `spec.json`
+- `mark-raw.svg` — the aperture mark that opens the eyebrow
+- `fonts/` — Cormorant Garamond and Archivo, subset, with `lnum` kept so house numbers sit on
+  the baseline
+- `spec.json` — the measured geometry: band rect, keylines, logo transform, and per slot the
+  face, size, tracking, baseline, anchor and x
+- `outlines/` — the outline cache
 
 ## Known gaps
 
-- **Carousel only.** No video variant. Orders with footage still need that built.
-- **English only.** A second language means a second run with translated `lines` and a
-  `_pt_` prefix, which the builder does not do yet.
-- **Not wired into the Aperture order run routine** — deliberate, until the two gaps above
-  are settled.
-- The reference Parque das Nações units baked copy to outlined vector paths. These set live
-  text instead: visually near-identical, not path-identical.
-
-## Fonts
-
-Playfair Display and Archivo are both under the SIL Open Font License 1.1, which is why they
-can be subset and embedded in the units. See `assets/fonts/NOTICE.md`.
+- **English only.** A second language means a second run with translated `lines` and a `_pt_`
+  prefix, which the builder does not do yet.
+- **Not in the Aperture order run routine.** Deliberate, until the above is settled.
